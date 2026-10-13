@@ -1,224 +1,255 @@
 # Statistical Calculator
 
-A beginner-friendly Django project that calculates population standard deviation and interquartile range (IQR) from comma-separated numbers.
+A web-based statistical calculator built with **Python and Django** that calculates **Population Standard Deviation** and **Interquartile Range (IQR)** from comma-separated numeric input. The project demonstrates Django views, forms, templates, input validation, separation of calculation logic, and saving detailed calculation records to a JSON file.
 
 ## Features
 
-- Home page with operation selection
-- Population standard deviation calculator
-- IQR calculator with Q1, Q3, and IQR output
-- Complete calculation records appended to `calculation_history.json`
-- Django form validation for invalid values and insufficient data
-- Simple templates and clean backend separation
-- Automated tests with Django's built-in test runner
+- **Population Standard Deviation:** Calculates the population standard deviation for a list of numbers.
+- **Interquartile Range (IQR):** Calculates the first quartile (Q1), third quartile (Q3), and IQR.
+- **Input validation:** Handles empty input, invalid values, missing values between commas, `NaN`, and infinity.
+- **Minimum data checks:** Requires at least 2 numbers for standard deviation and 4 numbers for IQR.
+- **Calculation history:** Saves successful calculations, formulas, intermediate values, timestamps, and results to `calculation_history.json`.
+- **Result pages:** Displays calculation results in browser-rendered Django templates.
+- **Automated tests:** Uses Django's built-in test runner.
 
-## Quartile Method Used
+## Tech Stack
 
-This project uses the Tukey median-split method:
+- **Language:** Python
+- **Web framework:** Django
+- **Frontend:** HTML and Django Templates
+- **History storage:** JSON file
+- **Database configuration:** SQLite (Django default configuration)
+- **Testing:** Django Test Framework
 
-1. Sort the values from smallest to largest.
-2. Split the sorted list into lower and upper halves.
-3. If there is an odd number of values, exclude the median from both halves.
-4. Find the median of the lower half (Q1) and the median of the upper half (Q3).
-5. IQR = Q3 - Q1.
+## Calculations
 
-This method is simple, consistent, and suitable for beginner Django projects.
+### 1. Population Standard Deviation
 
-## Minimum Number of Values
+Population standard deviation measures how spread out the values are around their mean.
 
-- Standard deviation: at least 2 values
-- IQR: at least 4 values
+\[
+\sigma = \sqrt{\frac{\sum_{i=1}^{N}(x_i-\mu)^2}{N}}
+\]
 
-## Project Structure
+Where:
+- `N` is the number of values.
+- `xᵢ` is an individual value.
+- `μ` is the population mean.
+- `σ` is the population standard deviation.
 
-```text
-statistical_calculator/
-├── manage.py
-├── README.md
-├── calculation_history.json  # created after the first successful calculation
-├── statistical_calculator/
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-└── calculator/
-    ├── __init__.py
-    ├── admin.py
-    ├── apps.py
-    ├── calculations.py
-    ├── forms.py
-    ├── json_history.py
-    ├── tests.py
-    ├── urls.py
-    ├── views.py
-    └── templates/
-        └── calculator/
-            ├── home.html
-            ├── calculator.html
-            └── result.html
-```
-
-## Setup
-
-1. Open a terminal in the project folder.
-2. Create and activate a virtual environment:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate   # macOS/Linux
-.\.venv\Scripts\activate    # Windows PowerShell
-```
-
-3. Install Django:
-
-```bash
-python -m pip install Django
-```
-
-4. Start the development server:
-
-```bash
-python manage.py runserver
-```
-
-5. Open the app in your browser:
-
-```text
-http://127.0.0.1:8000/
-```
-
-## Example Inputs and Outputs
-
-### Standard Deviation
-
-Input:
+**Example input**
 
 ```text
 1, 2, 3, 4, 5
 ```
 
-Population standard deviation:
+**Result:** `1.4142` (rounded to four decimal places)
 
-```text
-1.4142
-```
+### 2. Interquartile Range (IQR)
 
-### IQR
+IQR measures the spread of the middle 50% of a sorted dataset.
 
-Input:
+\[
+IQR = Q_3 - Q_1
+\]
+
+This project uses the **Tukey median-split method**:
+1. Sort the values in ascending order.
+2. Split the sorted values into lower and upper halves.
+3. If the number of values is odd, exclude the overall median from both halves.
+4. Calculate Q1 as the median of the lower half.
+5. Calculate Q3 as the median of the upper half.
+6. Subtract Q1 from Q3 to obtain the IQR.
+
+**Example input**
 
 ```text
 1, 2, 3, 4, 5, 6, 7, 8, 9
 ```
 
-Output:
+**Results**
+- Q1: `2.5`
+- Q3: `7.5`
+- IQR: `5.0`
 
-- Q1 = 2.5
-- Q3 = 7.5
-- IQR = 5.0
+> Quartile values can differ between software packages because different quartile methods exist. This project uses the Tukey median-split method described above.
 
-## Running Tests
+## Project Structure
+
+```text
+Stas_calculator/
+├── manage.py
+├── README.md
+├── calculation_history.json
+├── db.sqlite3
+├── calculator/
+│   ├── migrations/
+│   ├── templates/
+│   │   └── calculator/
+│   │       ├── home.html
+│   │       ├── calculator.html
+│   │       └── result.html
+│   ├── calculations.py
+│   ├── forms.py
+│   ├── json_history.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+└── statistical_calculator/
+    ├── settings.py
+    ├── urls.py
+    ├── asgi.py
+    └── wsgi.py
+```
+
+**Important files**
+- `calculations.py` — parsing and statistical calculations.
+- `forms.py` — validates the numbers submitted by the user.
+- `views.py` — handles browser requests and prepares result pages.
+- `urls.py` — maps URL paths to views.
+- `json_history.py` — saves calculation records to JSON.
+- `templates/` — contains the HTML pages.
+- `tests.py` — contains automated tests.
+- `calculation_history.json` — stores successful calculation history; it may be created when the first successful calculation is saved.
+
+## Getting Started
+
+### Prerequisites
+
+- Python installed on your computer.
+- A terminal or command prompt.
+- `pip`, Python's package installer.
+
+### 1. Download or clone the project
+
+Open a terminal in the project directory, where `manage.py` is located.
+
+### 2. Create a virtual environment
 
 ```bash
-python manage.py test
+python -m venv .venv
 ```
 
-## Calculation History JSON
+### 3. Activate the virtual environment
 
-Each valid calculation is saved as one object in the top-level JSON list. The file
-is created in the project root when the first calculation succeeds. Missing or
-empty files start as an empty history, and each new record is appended without
-removing earlier records. Invalid form submissions are never saved.
+**Windows PowerShell**
 
-A Standard Deviation record contains:
-
-```json
-{
-  "calculated_at": "2026-10-13T23:00:00+05:30",
-  "operation": "standard_deviation",
-  "original_values": [1.0, 2.0, 3.0, 4.0, 5.0],
-  "calculation_method": "Population standard deviation",
-  "intermediate_values": {
-    "number_of_observations": 5,
-    "mean": 3.0,
-    "deviations_from_mean": [-2.0, -1.0, 0.0, 1.0, 2.0],
-    "squared_deviations": [4.0, 1.0, 0.0, 1.0, 4.0],
-    "sum_of_squared_deviations": 10.0,
-    "population_variance": 2.0
-  },
-  "formulas": {
-    "mean": "sum(values) / number_of_observations",
-    "deviation": "value - mean",
-    "squared_deviation": "deviation ** 2",
-    "population_variance": "sum(squared_deviations) / number_of_observations",
-    "population_standard_deviation": "sqrt(population_variance)"
-  },
-  "result": {
-    "population_standard_deviation": 1.4142135623730951
-  }
-}
+```powershell
+.\.venv\Scripts\Activate.ps1
 ```
 
-An IQR record keeps the entered order in `original_values` and the sorted order in
-`sorted_values`. It also saves the lower and upper halves used by the selected
-quartile method:
+**Windows Command Prompt**
 
-```json
-{
-  "calculated_at": "2026-10-13T23:00:00+05:30",
-  "operation": "iqr",
-  "original_values": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0],
-  "sorted_values": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0],
-  "calculation_method": "Tukey median-split: exclude the overall median when the list length is odd",
-  "intermediate_values": {
-    "lower_half": [1.0, 2.0, 3.0, 4.0],
-    "upper_half": [6.0, 7.0, 8.0, 9.0],
-    "q1": 2.5,
-    "q3": 7.5
-  },
-  "formulas": {
-    "q1": "median(lower_half)",
-    "q3": "median(upper_half)",
-    "iqr": "q3 - q1"
-  },
-  "result": {"q1": 2.5, "q3": 7.5, "iqr": 5.0}
-}
+```bat
+.venv\Scripts\activate.bat
 ```
 
-### Checking the arithmetic by hand
+**macOS / Linux**
 
-For the standard deviation sample above, the deviations are `[-2, -1, 0, 1, 2]`;
-their squares sum to `10`. Divide by `n = 5` to get population variance `2`, then
-take its square root to get approximately `1.4142`. The web page rounds this
-display to four decimal places; the JSON record preserves the full Python float.
+```bash
+source .venv/bin/activate
+```
 
-For IQR, the odd-sized list's overall median (`5`) is left out of both halves.
-The lower half has median `(2 + 3) / 2 = 2.5` and the upper half has median
-`(7 + 8) / 2 = 7.5`; therefore `IQR = 7.5 - 2.5 = 5.0`.
+### 4. Install Django
 
-The JSON I/O is isolated in `calculator/json_history.py`; mathematical details
-are created in `calculator/calculations.py`. The local history file is plain
-text, so open it in an editor or inspect it with:
+```bash
+python -m pip install Django
+```
+
+If the project includes a `requirements.txt` file, you can install its dependencies with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 5. Apply database migrations
+
+```bash
+python manage.py migrate
+```
+
+### 6. Start the development server
+
+```bash
+python manage.py runserver
+```
+
+### 7. Open the application
+
+Visit:
+
+```text
+http://127.0.0.1:8000/
+```
+
+Stop the development server with `Ctrl + C`.
+
+## How to Use
+
+1. Open the application's home page.
+2. Select the Standard Deviation or IQR calculator.
+3. Enter numbers separated by commas, for example: `10, 20, 30, 40`.
+4. Submit the form.
+5. View the calculated result.
+6. After a successful calculation, the application attempts to append a detailed record to `calculation_history.json`.
+
+## Calculation History
+
+Each successful calculation can store:
+- Timestamp and operation name.
+- Original input values.
+- Calculation method.
+- Intermediate values used in the calculation.
+- Formula descriptions.
+- Final result.
+
+The JSON file can be inspected in a terminal with:
 
 ```bash
 python -m json.tool calculation_history.json
 ```
 
-## Learning Notes
+The history is stored in a local JSON file rather than in a database model. Keep a backup if you need to preserve it. In a multi-user or production deployment, a database-backed history would generally be more suitable.
 
-This project demonstrates how Django works in practice:
+## Running Tests
 
-- URLs route browser requests to views
-- Views receive GET and POST requests
-- Forms validate input
-- Calculation functions handle pure Python logic
-- Templates display the final result
-- Context passes values from backend to frontend
+Run the project's automated tests with:
 
-## Future Improvements
+```bash
+python manage.py test
+```
 
-- Add a clear error summary near the form
-- Move history to a database if the project later needs concurrent users or richer searches
-- Improve styling with CSS layouts
-- Include more stats functions such as mean and median
+## What I Learned
+
+This project provides practice with:
+- Building a web application using Django.
+- Routing requests through URLs and views.
+- Handling form submissions with GET and POST requests.
+- Validating and parsing user input.
+- Separating mathematical logic from web logic.
+- Rendering dynamic results using Django templates.
+- Reading and writing JSON data with Python.
+- Writing and running automated tests.
+
+## Possible Future Improvements
+
+- Add more statistical operations, such as mean, median, variance, and range.
+- Add a history page to browse previous calculations.
+- Allow users to download calculation results as a JSON or CSV file.
+- Improve responsive styling and accessibility.
+- Add database-backed history and user-specific records.
+- Deploy the application using production-ready Django settings.
+
+## Security and Deployment Notes
+
+This project is intended for local development and learning. Before deploying it publicly:
+- Set `DEBUG = False`.
+- Store `SECRET_KEY` in an environment variable and replace the development key.
+- Configure `ALLOWED_HOSTS`.
+- Review Django's deployment checklist.
+- Avoid committing virtual environments, local databases, or sensitive configuration to version control.
+
+## License
+
+No license is specified yet. Add a `LICENSE` file if you want to define how others may use, modify, and distribute this project.
