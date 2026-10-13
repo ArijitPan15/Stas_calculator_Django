@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistical Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 24px;
+            background: #fafafa;
+        }
+        .button-link {
+            display: inline-block;
+            margin: 10px 12px 0 0;
+            padding: 12px 20px;
+            background: #1e88e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Statistical Calculator</h1>
+        <p>Select an operation to calculate:</p>
+
+        <div>
+            <a class="button-link" href="{% url 'standard_deviation' %}">Standard Deviation</a>
+            <a class="button-link" href="{% url 'iqr' %}">Interquartile Range (IQR)</a>
+        </div>
+    </div>
+</body>
+</html>

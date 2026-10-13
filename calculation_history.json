@@ -1,0 +1,383 @@
+[
+    {
+        "calculated_at": "2026-10-14T00:08:41+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            0.0,
+            7.0,
+            8.0,
+            77.0,
+            99.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 5,
+            "mean": 38.2,
+            "deviations_from_mean": [
+                -38.2,
+                -31.200000000000003,
+                -30.200000000000003,
+                38.8,
+                60.8
+            ],
+            "squared_deviations": [
+                1459.2400000000002,
+                973.4400000000002,
+                912.0400000000002,
+                1505.4399999999998,
+                3696.64
+            ],
+            "sum_of_squared_deviations": 8546.800000000001,
+            "population_variance": 1709.3600000000001
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 41.344407118738566
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:10:24+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            23.0,
+            23.0,
+            2366.0,
+            44.0,
+            5.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 5,
+            "mean": 492.2,
+            "deviations_from_mean": [
+                -469.2,
+                -469.2,
+                1873.8,
+                -448.2,
+                -487.2
+            ],
+            "squared_deviations": [
+                220148.63999999998,
+                220148.63999999998,
+                3511126.44,
+                200883.24,
+                237363.84
+            ],
+            "sum_of_squared_deviations": 4389670.8,
+            "population_variance": 877934.1599999999
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 936.9814085668936
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:22:02+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            33.0,
+            44.0,
+            33.0,
+            56.0,
+            6.0,
+            6.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 6,
+            "mean": 29.666666666666668,
+            "deviations_from_mean": [
+                3.333333333333332,
+                14.333333333333332,
+                3.333333333333332,
+                26.333333333333332,
+                -23.666666666666668,
+                -23.666666666666668
+            ],
+            "squared_deviations": [
+                11.111111111111104,
+                205.4444444444444,
+                11.111111111111104,
+                693.4444444444443,
+                560.1111111111112,
+                560.1111111111112
+            ],
+            "sum_of_squared_deviations": 2041.3333333333333,
+            "population_variance": 340.22222222222223
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 18.445113776342563
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:22:55+05:30",
+        "operation": "iqr",
+        "original_values": [
+            33.0,
+            44.0,
+            33.0,
+            56.0,
+            6.0,
+            6.0
+        ],
+        "sorted_values": [
+            6.0,
+            6.0,
+            33.0,
+            33.0,
+            44.0,
+            56.0
+        ],
+        "calculation_method": "Tukey median-split: exclude the overall median when the list length is odd",
+        "intermediate_values": {
+            "lower_half": [
+                6.0,
+                6.0,
+                33.0
+            ],
+            "upper_half": [
+                33.0,
+                44.0,
+                56.0
+            ],
+            "q1": 6.0,
+            "q3": 44.0
+        },
+        "formulas": {
+            "q1": "median(lower_half)",
+            "q3": "median(upper_half)",
+            "iqr": "q3 - q1"
+        },
+        "result": {
+            "q1": 6.0,
+            "q3": 44.0,
+            "iqr": 38.0
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:23:32+05:30",
+        "operation": "iqr",
+        "original_values": [
+            33.0,
+            44.0,
+            33.0,
+            56.0,
+            6.0,
+            6.0
+        ],
+        "sorted_values": [
+            6.0,
+            6.0,
+            33.0,
+            33.0,
+            44.0,
+            56.0
+        ],
+        "calculation_method": "Tukey median-split: exclude the overall median when the list length is odd",
+        "intermediate_values": {
+            "lower_half": [
+                6.0,
+                6.0,
+                33.0
+            ],
+            "upper_half": [
+                33.0,
+                44.0,
+                56.0
+            ],
+            "q1": 6.0,
+            "q3": 44.0
+        },
+        "formulas": {
+            "q1": "median(lower_half)",
+            "q3": "median(upper_half)",
+            "iqr": "q3 - q1"
+        },
+        "result": {
+            "q1": 6.0,
+            "q3": 44.0,
+            "iqr": 38.0
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:24:14+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            33.0,
+            44.0,
+            33.0,
+            56.0,
+            6.0,
+            6.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 6,
+            "mean": 29.666666666666668,
+            "deviations_from_mean": [
+                3.333333333333332,
+                14.333333333333332,
+                3.333333333333332,
+                26.333333333333332,
+                -23.666666666666668,
+                -23.666666666666668
+            ],
+            "squared_deviations": [
+                11.111111111111104,
+                205.4444444444444,
+                11.111111111111104,
+                693.4444444444443,
+                560.1111111111112,
+                560.1111111111112
+            ],
+            "sum_of_squared_deviations": 2041.3333333333333,
+            "population_variance": 340.22222222222223
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 18.445113776342563
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:24:30+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            99.0,
+            99.0,
+            77.0,
+            88.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 4,
+            "mean": 90.75,
+            "deviations_from_mean": [
+                8.25,
+                8.25,
+                -13.75,
+                -2.75
+            ],
+            "squared_deviations": [
+                68.0625,
+                68.0625,
+                189.0625,
+                7.5625
+            ],
+            "sum_of_squared_deviations": 332.75,
+            "population_variance": 83.1875
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 9.12071817347735
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:24:57+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            99.0,
+            99.0,
+            77.0,
+            88.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 4,
+            "mean": 90.75,
+            "deviations_from_mean": [
+                8.25,
+                8.25,
+                -13.75,
+                -2.75
+            ],
+            "squared_deviations": [
+                68.0625,
+                68.0625,
+                189.0625,
+                7.5625
+            ],
+            "sum_of_squared_deviations": 332.75,
+            "population_variance": 83.1875
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 9.12071817347735
+        }
+    },
+    {
+        "calculated_at": "2026-10-14T00:25:18+05:30",
+        "operation": "standard_deviation",
+        "original_values": [
+            99.0,
+            99.0,
+            77.0,
+            88.0
+        ],
+        "calculation_method": "Population standard deviation",
+        "intermediate_values": {
+            "number_of_observations": 4,
+            "mean": 90.75,
+            "deviations_from_mean": [
+                8.25,
+                8.25,
+                -13.75,
+                -2.75
+            ],
+            "squared_deviations": [
+                68.0625,
+                68.0625,
+                189.0625,
+                7.5625
+            ],
+            "sum_of_squared_deviations": 332.75,
+            "population_variance": 83.1875
+        },
+        "formulas": {
+            "mean": "sum(values) / number_of_observations",
+            "deviation": "value - mean",
+            "squared_deviation": "deviation ** 2",
+            "population_variance": "sum(squared_deviations) / number_of_observations",
+            "population_standard_deviation": "sqrt(population_variance)"
+        },
+        "result": {
+            "population_standard_deviation": 9.12071817347735
+        }
+    }
+]

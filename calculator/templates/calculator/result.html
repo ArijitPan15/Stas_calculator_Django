@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 24px;
+            background: #fafafa;
+        }
+        .result-box {
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .warning {
+            color: #8a4b00;
+            background: #fff3cd;
+            border-left: 5px solid #e0a800;
+            padding: 12px;
+        }
+        .nav {
+            margin-top: 20px;
+        }
+        .nav a {
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>{{ page_title }}</h1>
+
+        <p><strong>Entered numbers:</strong> {{ numbers_text }}</p>
+
+        {% if sorted_numbers_text %}
+            <p><strong>Sorted numbers:</strong> {{ sorted_numbers_text }}</p>
+        {% endif %}
+
+        <div class="result-box">
+            {% if output_label %}
+                <p><strong>{{ output_label }}</strong>: {{ output_value }}</p>
+            {% endif %}
+
+            {% if q1 is not None %}
+                <p><strong>Q1:</strong> {{ q1 }}</p>
+            {% endif %}
+
+            {% if q3 is not None %}
+                <p><strong>Q3:</strong> {{ q3 }}</p>
+            {% endif %}
+
+            {% if iqr is not None %}
+                <p><strong>IQR:</strong> {{ iqr }}</p>
+            {% endif %}
+        </div>
+
+        {% if history_error %}
+            <p class="warning">{{ history_error }}</p>
+        {% else %}
+            <p>This calculation was saved to the local history file.</p>
+        {% endif %}
+
+        <div class="nav">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% if operation == 'standard_deviation' %}{% url 'standard_deviation' %}{% else %}{% url 'iqr' %}{% endif %}">Calculate again</a>
+        </div>
+    </div>
+</body>
+</html>
